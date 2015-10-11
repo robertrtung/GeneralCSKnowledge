@@ -124,3 +124,38 @@ o					}
 o				}
 o			}
 
+Synchronization:
+mutex: 1 when unlocked, -- everytime it is called and something is waiting, ++ when done
+Semaphore: doesn't have to start at 1
+synchronized keyword means the method locks the mutex upon calling and unlocks after
+synchronized statements are similar but they specify the object involved:
+	synchronized(this){
+		a++;
+	}
+stringbuffer synchronized while stringbuilder is not
+deadlock is when your threads both lock and are waiting for each other to release locks
+	easiest fix is to say your locks have to follow a certain order - not often used in practice
+good definition of polymorphism: the ability for a method to mean different things in different objects
+
+Design patterns:
+	Listener/Observer:
+		listener is the objects that get updated (do this as an interface for the objects you create)
+			has an update() method
+		have an announcer which holds the list of listeners and updates them as necessary
+			announcer.addListener(foo)
+		Ex: you can have the announcer be a GUI for a game and each of the objects be a listener
+	Singleton: to make sure there is exactly 1 instance of something (example below)
+		public class OnlyOneOfMe {
+			private static OnlyOneOfMe theOneInstance = null;
+
+			private OnlyOneOfMe() {
+			// do stuff to make the object
+			}
+
+			public static OnlyOneOfMe getInstance() {
+				if (theOneInstance == null) {
+					theOneInstance = new OnlyOneOfMe();
+				}
+				return theOneInstance;
+			}
+		}
